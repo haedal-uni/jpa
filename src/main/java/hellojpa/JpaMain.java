@@ -17,15 +17,13 @@ public class JpaMain {
         tx.begin();
 
         try {
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    // paging
-                    .setFirstResult(5) // 5번부터 (OFFSET)
-                    .setMaxResults(8) // 8개 가져와 (LIMIT)
+            // 비영속
+            Member member = new Member();
+            member.setId(10L);
+            member.setName("HELLO");
 
-                            .getResultList();
-            for(Member member : result){
-                System.out.println("member.name = " + member.getName());
-            }
+            // 영속
+            em.persist(member); // ← 이 때 db에 저장되는 것이 아님!
 
             tx.commit();
         }catch (Exception e){
