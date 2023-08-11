@@ -25,6 +25,10 @@ public class JpaMain {
             // 영속
             em.persist(member); // ← 이 때 db에 저장되는 것이 아님!
 
+            // 조회
+            Member findMember = em.find(Member.class, 10L);
+            System.out.println("findMember.id = " + findMember.getId());
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();
