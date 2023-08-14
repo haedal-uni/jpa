@@ -17,17 +17,14 @@ public class JpaMain {
         tx.begin();
 
         try {
-            // 비영속
-            Member member = new Member();
-            member.setId(10L);
-            member.setName("HELLO");
-
             // 영속
-            em.persist(member); // ← 이 때 db에 저장되는 것이 아님!
+            Member member1 = new Member(25L, "A");
+            Member member2 = new Member(30L, "B");
 
-            // 조회
-            Member findMember = em.find(Member.class, 10L);
-            System.out.println("findMember.id = " + findMember.getId());
+            em.persist(member1);
+            em.persist(member2);
+
+            System.out.println("==================");
 
             tx.commit();
         }catch (Exception e){

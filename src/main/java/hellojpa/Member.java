@@ -10,6 +10,14 @@ public class Member {
 
     private String name;
 
+    public Member(){ // 기본 생성자
+    }
+
+    public Member(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
