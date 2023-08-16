@@ -18,13 +18,14 @@ public class JpaMain {
 
         try {
             // 영속
-            //Member member1 = new Member(25L, "A");
-            Member member = em.find(Member.class, 25L);
-            member.setName("C");
+            Member member = new Member(30L, "MEMBER");
+            em.persist(member); // 영속성 컨텍스트에 담긴다.
+
+            em.flush(); // db의 insert 쿼리가 이 시점에 나감
 
             System.out.println("==================");
 
-            tx.commit();
+            tx.commit(); // db 트랜잭션이 커밋됨
         }catch (Exception e){
             tx.rollback();
         }finally { // 작업이 끝나면 entityManager를 닫아준다.(사용을 하면 무조건 닫아줘야 한다) ★★★
