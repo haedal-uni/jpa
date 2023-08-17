@@ -21,7 +21,7 @@ public class JpaMain {
             Member member = em.find(Member.class, 35L); // 영속 상태
             member.setName("aa"); // Dirty Checking
 
-            em.detach(member); // jpa에서 더 이상 관리하지 x
+            em.clear();
 
             System.out.println("==================");
             tx.commit(); // 아무일도 일어나지 않는다(더 이상 jpa에서 관리하지 않으므로)
