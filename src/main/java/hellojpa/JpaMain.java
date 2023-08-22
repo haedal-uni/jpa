@@ -17,15 +17,7 @@ public class JpaMain {
         tx.begin();
 
         try {
-            // 영속
-            Member member = em.find(Member.class, 35L); // 영속 상태
-            member.setName("aa"); // Dirty Checking
-
-            em.clear();
-            Member member1 = em.find(Member.class, 35L);
-
-            System.out.println("==================");
-            tx.commit(); // 아무일도 일어나지 않는다(더 이상 jpa에서 관리하지 않으므로)
+            tx.commit();
         }catch (Exception e){
             tx.rollback();
         }finally { // 작업이 끝나면 entityManager를 닫아준다.(사용을 하면 무조건 닫아줘야 한다) ★★★
