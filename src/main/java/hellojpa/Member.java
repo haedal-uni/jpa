@@ -1,6 +1,7 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -8,10 +9,10 @@ public class Member {
     @Id
     private Long id;
 
-    @Column(name = "name") // db column은 name
+    @Column(name = "name", nullable = false, columnDefinition = " varchar(100) default ‘EMPTY'") // 해당 column은 변경 X
     private String username;
 
-    private Integer age;
+    private BigDecimal age;
 
     @Enumerated(EnumType.STRING) // db에는 enum 타입이 없으므로
     private RoleType roleType;
