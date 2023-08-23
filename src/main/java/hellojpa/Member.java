@@ -7,12 +7,27 @@ import javax.persistence.Id;
 @Entity
 public class Member {
     @Id
-    private Long id;
+    private String id;
 
     @Column(name = "name", nullable = false)
     private String username;
 
     public Member(){
+    }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
