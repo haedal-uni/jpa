@@ -14,7 +14,7 @@ public class Member {
 
     private int age;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
     /*
