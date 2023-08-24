@@ -18,9 +18,7 @@ public class JpaMain {
 
         try {
             Member member = new Member();
-            member.setId(3L);
-            member.setUsername("c");
-            member.setRoleType(RoleType.GUEST);
+            member.setUsername("C");
             em.persist(member);
 
             tx.commit();
