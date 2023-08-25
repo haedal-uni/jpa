@@ -13,6 +13,7 @@
       <artifactId>hibernate-entitymanager</artifactId>
       <version>5.3.10.Final</version>
     </dependency>
+
     <!-- H2 데이터베이스 -->
     <dependency>
       <groupId>com.h2database</groupId>
@@ -25,7 +26,9 @@
       <artifactId>jaxb-api</artifactId>
       <version>2.3.0</version>
     </dependency>
+
   </dependencies>
+
   <build>
     <plugins>
       <plugin>

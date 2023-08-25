@@ -1,10 +1,9 @@
-package hellojpa;
+package jpashop;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -16,11 +15,7 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        try {
-            Member1 member = new Member1();
-            member.setUsername("C");
-            em.persist(member);
-
+        try{
             tx.commit();
         }catch (Exception e){
             tx.rollback();
