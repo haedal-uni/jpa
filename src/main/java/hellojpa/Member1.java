@@ -7,7 +7,7 @@ import javax.persistence.*;
         name = "MEMBER_SEQ_GENERATOR",
         sequenceName = "MEMBER_SEQ", //매핑할 데이터베이스 시퀀스 이름
         initialValue = 1, allocationSize = 50)
-public class Member {
+public class Member1 {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "MEMBER_SEQ_GENERATOR")
@@ -15,7 +15,7 @@ public class Member {
     @Column(name = "name", nullable = false)
     private String username;
 
-    public Member() {
+    public Member1() {
     }
 
     public Long getId() {
