@@ -25,6 +25,9 @@ public class JpaMain {
             member.setTeam(team);
             em.persist(member);
 
+            em.flush(); // 강제 호출 (영속성 컨텍스트에 있는 것들을 db에 쿼리를 날려버려서 싱크를 맞춤)
+            em.clear(); // 영속성 컨텍스트 초기화
+
             Member findMember = em.find(Member.class, member.getId());
 
             Team findTeam = findMember.getTeam();
