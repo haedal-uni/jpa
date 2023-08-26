@@ -33,6 +33,10 @@ public class JpaMain {
             Team findTeam = findMember.getTeam();
             System.out.println("findTeam.getName() = " + findTeam.getName());
 
+            // db에 100번이 있다고 가정
+            Team newTeam = em.find(Team.class, 100L);
+            findMember.setTeam(newTeam);
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();
