@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -17,9 +16,26 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member1 member = new Member1();
-            member.setUsername("C");
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team); // 영속 상태가 되면 무조건 pk 값이 세팅되고 영속 상태가 된다.
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team);
             em.persist(member);
+
+            em.flush(); // 강제 호출 (영속성 컨텍스트에 있는 것들을 db에 쿼리를 날려버려서 싱크를 맞춤)
+            em.clear(); // 영속성 컨텍스트 초기화
+
+            Member findMember = em.find(Member.class, member.getId());
+
+            Team findTeam = findMember.getTeam();
+            System.out.println("findTeam.getName() = " + findTeam.getName());
+
+            // db에 100번이 있다고 가정
+            Team newTeam = em.find(Team.class, 100L);
+            findMember.setTeam(newTeam);
 
             tx.commit();
         }catch (Exception e){
