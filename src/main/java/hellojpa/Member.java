@@ -15,7 +15,7 @@ public class Member {
     Member랑 Team은 reference로 가져가야 하는데 db에 맞춰서 모델링을 하고 있다.
      */
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
