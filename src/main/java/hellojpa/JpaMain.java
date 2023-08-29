@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -29,13 +30,11 @@ public class JpaMain {
             em.clear(); // 영속성 컨텍스트 초기화
 
             Member findMember = em.find(Member.class, member.getId());
+            List<Member> members = findMember.getTeam().getMembers();
 
-            Team findTeam = findMember.getTeam();
-            System.out.println("findTeam.getName() = " + findTeam.getName());
-
-            // db에 100번이 있다고 가정
-            Team newTeam = em.find(Team.class, 100L);
-            findMember.setTeam(newTeam);
+            for (Member m: members) {
+                System.out.println("m.getUsername() = " + m.getUsername());
+            }
 
             tx.commit();
         }catch (Exception e){
