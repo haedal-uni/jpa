@@ -19,6 +19,7 @@ public class JpaMain {
         try {
             Team team = new Team();
             team.setName("TeamA");
+            //team.getMembers().add(member);
             em.persist(team); // 영속 상태가 되면 무조건 pk 값이 세팅되고 영속 상태가 된다.
 
             Member member = new Member();
@@ -26,15 +27,17 @@ public class JpaMain {
             member.setTeam(team);
             em.persist(member);
 
-            em.flush(); // 강제 호출 (영속성 컨텍스트에 있는 것들을 db에 쿼리를 날려버려서 싱크를 맞춤)
-            em.clear(); // 영속성 컨텍스트 초기화
+            //em.flush(); // 강제 호출 (영속성 컨텍스트에 있는 것들을 db에 쿼리를 날려버려서 싱크를 맞춤)
+            //em.clear(); // 영속성 컨텍스트 초기화
 
-            Member findMember = em.find(Member.class, member.getId());
-            List<Member> members = findMember.getTeam().getMembers();
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member> members = findTeam.getMembers();
 
+            System.out.println("= = = = = = = = =");
             for (Member m: members) {
                 System.out.println("m.getUsername() = " + m.getUsername());
             }
+            System.out.println("= = = = = = = = =");
 
             tx.commit();
         }catch (Exception e){
