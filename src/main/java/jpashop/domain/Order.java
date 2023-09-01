@@ -2,6 +2,8 @@ package jpashop.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ORDERS") // DB마다 다르긴 한데 ORDER가 예약어로 걸려있다.(order by) 그래서 orders로 많이 쓴다.
@@ -21,11 +23,18 @@ public class Order {
     가급적 단방향으로 한다.
      */
 
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems = new ArrayList<>();
+
     private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
     public Long getId() {
         return id;
     }

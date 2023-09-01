@@ -1,5 +1,9 @@
 package jpashop;
 
+import jpashop.domain.Order;
+import jpashop.domain.OrderItem;
+import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -16,6 +20,22 @@ public class JpaMain {
         tx.begin();
 
         try{
+            // 예시 코드 (주문을 해야한다고 가정) _ 의사코드(pseudo code)
+            // 1) 양방향 매핑 시
+//            Order order = new Order();
+//            order.addOrderItem(new OrderItem());
+//            em.persist(order);
+
+            // 2) 단방향 매핑 시
+            Order order = new Order();
+            em.persist(order);
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
+
+            em.persist(orderItem);
+
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();
