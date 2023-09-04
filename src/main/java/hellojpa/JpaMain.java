@@ -17,26 +17,20 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team); // 영속 상태가 되면 무조건 pk 값이 세팅되고 영속 상태가 된다.
+            /*
+            실무에서는 생성자 Builder 패턴으로 사용한다.
+            setter 사용 잘 안함. 예제니깐 작성
+             */
 
             Member member = new Member();
-            member.setUsername("member1");
-            member.changeTeam(team); // **
+            member.setUsername("member");
+
             em.persist(member);
 
-            em.flush(); // 강제 호출 (영속성 컨텍스트에 있는 것들을 db에 쿼리를 날려버려서 싱크를 맞춤)
-            em.clear(); // 영속성 컨텍스트 초기화
-
-            Team findTeam = em.find(Team.class, team.getId());
-            List<Member> members = findTeam.getMembers();
-
-            System.out.println("= = = = = = = = =");
-            for (Member m: members) {
-                System.out.println("m.getUsername() = " + m.getUsername());
-            }
-            System.out.println("= = = = = = = = =");
+            Team team = new Team();
+            team.setName("team");
+            team.getMembers().add(member); // ←
+            em.persist(team);
 
             tx.commit();
         }catch (Exception e){
