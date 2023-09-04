@@ -2,7 +2,6 @@ package jpashop;
 
 import jpashop.domain.Order;
 import jpashop.domain.OrderItem;
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
