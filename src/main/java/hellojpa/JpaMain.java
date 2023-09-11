@@ -24,6 +24,13 @@ public class JpaMain {
             movie.setPrice(10000);
             em.persist(movie);
 
+            em.flush();
+            em.clear();
+
+            Movie findMove = em.find(Movie.class, movie.getId());
+            System.out.println("findMove = " + findMove);
+
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();
