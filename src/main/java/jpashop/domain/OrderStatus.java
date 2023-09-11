@@ -1,5 +1,5 @@
-package jpashop.domain;
-
-public enum OrderStatus {
-    ORDER, CANCEL
-}
+//package jpashop.domain;
+//
+//public enum OrderStatus {
+//    ORDER, CANCEL
+//}
