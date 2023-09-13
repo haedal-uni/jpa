@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Member {
+public class Member extends BaseEntity{
     /*
     * getter, setter를 꼭 다 만들 필요는 없지만 getter는 가급적 만드는 것이 좋고 setter는 고민할 필요가 있다.
     * setter를 막 만들면 아무데서나 set할 수 있어서 코드 추적하기에 좋지 않다.(유지 보수성이 떨어질 수 있다.)

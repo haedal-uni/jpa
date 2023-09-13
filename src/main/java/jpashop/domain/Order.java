@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "ORDERS") // DB마다 다르긴 한데 ORDER가 예약어로 걸려있다.(order by) 그래서 orders로 많이 쓴다.
-public class Order {
+public class Order extends BaseEntity{
     @Id @GeneratedValue
     @Column(name = "ORDER_ID")
     private Long id;

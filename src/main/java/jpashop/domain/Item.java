@@ -12,7 +12,7 @@ Item만 단독으로 테이블을 저장할 일이 있냐 없냐를 판단해야
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE) // 전략 : 싱글 테이블
 @DiscriminatorColumn
-public abstract class Item{
+public abstract class Item extends BaseEntity{
     @Id @GeneratedValue
     @Column(name = "ITEM_ID")
     private Long id;
