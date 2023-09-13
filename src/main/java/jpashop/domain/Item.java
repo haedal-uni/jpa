@@ -4,8 +4,15 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Item만 단독으로 테이블을 저장할 일이 있냐 없냐를 판단해야한다.
+여기서는 "없다" 라고 가정함
+→ abstract
+ */
 @Entity
-public class Item {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // 전략 : 싱글 테이블
+@DiscriminatorColumn
+public abstract class Item{
     @Id @GeneratedValue
     @Column(name = "ITEM_ID")
     private Long id;
