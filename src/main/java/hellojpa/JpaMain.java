@@ -21,31 +21,16 @@ public class JpaMain {
             member1.setUsername("member1");
             em.persist(member1);
 
-            Member member2 = new Member();
-            member2.setUsername("member2");
-            em.persist(member2);
-
             em.flush();
             em.clear();
 
             Member m1 = em.find(Member.class, member1.getId());
-            Member m2 = em.getReference(Member.class, member2.getId());
+            System.out.println("m1 = " + m1.getClass());
 
-            System.out.println("m1 == m2 : " + (m1 instanceof Member)); // m1 == m2 : true
-            System.out.println("m1 == m2 : " + (m2 instanceof Member)); // m1 == m2 : true
+            Member reference = em.getReference(Member.class, member1.getId());
+            System.out.println("reference.getClass() = " + reference.getClass());
 
-
-            /*
-            Member m1 = em.find(Member.class, member1.getId());
-            Member m2 = em.find(Member.class, member2.getId());
-            System.out.println("m1 == m2 : " + (m1.getClass() == m2.getClass()));
-            m1 == m2 : true
-
-            Member m1 = em.find(Member.class, member1.getId());
-            Member m2 = em.getReference(Member.class, member2.getId());
-            System.out.println("m1 == m2 : " + (m1.getClass() == m2.getClass()));
-            m1 == m2 : false
-             */
+            System.out.println("a == a " + (m1 == reference));
 
             tx.commit();
         }catch (Exception e){
