@@ -27,14 +27,16 @@ public class JpaMain {
             Member refMember = em.getReference(Member.class, member1.getId());
             System.out.println("refMember = " + refMember.getClass()); // proxy
 
-            Member findMember = em.find(Member.class, member1.getId());
-            System.out.println("findMember.getClass() = " + findMember.getClass()); // Member
+            em.detach(refMember);
+//             em.close();
+//             em.clear();
 
-            System.out.println("refMember == findMember : " + (refMember == findMember));
+            refMember.getUsername();
 
             tx.commit();
         }catch (Exception e){
             tx.rollback();
+            e.printStackTrace();
         }finally { // 작업이 끝나면 entityManager를 닫아준다.(사용을 하면 무조건 닫아줘야 한다) ★★★
             em.close();
         }
