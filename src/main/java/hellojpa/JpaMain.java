@@ -1,5 +1,7 @@
 package hellojpa;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -27,11 +29,11 @@ public class JpaMain {
             Member refMember = em.getReference(Member.class, member1.getId());
             System.out.println("refMember = " + refMember.getClass()); // proxy
 
-            em.detach(refMember);
-//             em.close();
-//             em.clear();
 
-            refMember.getUsername();
+            refMember.getUsername();// 해당 코드가 있으면 아래 코드가 true, 없으면 false
+            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));// 초기화 여부
+
+            Hibernate.initialize(refMember);// 강제 초기화 (refMember.getUsername();도 강제 초기화임)
 
             tx.commit();
         }catch (Exception e){
