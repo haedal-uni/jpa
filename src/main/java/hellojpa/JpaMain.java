@@ -26,14 +26,7 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            Member refMember = em.getReference(Member.class, member1.getId());
-            System.out.println("refMember = " + refMember.getClass()); // proxy
-
-
-            refMember.getUsername();// 해당 코드가 있으면 아래 코드가 true, 없으면 false
-            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));// 초기화 여부
-
-            Hibernate.initialize(refMember);// 강제 초기화 (refMember.getUsername();도 강제 초기화임)
+            Member m = em.find(Member.class, member1.getId());
 
             tx.commit();
         }catch (Exception e){
