@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.CascadeType.*;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
@@ -25,11 +26,11 @@ public class Order extends BaseEntity{
     가급적 단방향으로 한다.
      */
 
-    @OneToOne(fetch = LAZY)
+    @OneToOne(fetch = LAZY, cascade = ALL)
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderDate;
