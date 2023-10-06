@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 @Table(name = "ORDERS") // DB마다 다르긴 한데 ORDER가 예약어로 걸려있다.(order by) 그래서 orders로 많이 쓴다.
 public class Order extends BaseEntity{
@@ -15,7 +17,7 @@ public class Order extends BaseEntity{
 //    @Column(name = "MEMBER_ID")
 //    private Long memberId;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
     /*
@@ -23,7 +25,7 @@ public class Order extends BaseEntity{
     가급적 단방향으로 한다.
      */
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
