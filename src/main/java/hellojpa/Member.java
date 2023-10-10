@@ -1,7 +1,6 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class Member{
@@ -18,6 +17,18 @@ public class Member{
     // 주소
     @Embedded
     private Address homeAddress;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "city",
+            column = @Column(name = "WORK_CITY")), // DB 컬럼을 따로 매핑해야한다.
+            @AttributeOverride(name = "street",
+                    column = @Column(name = "WORK_STREET")),
+            @AttributeOverride(name = "zipcode",
+                    column = @Column(name = "WORK_ZIPCODE")),
+
+    })
+    private Address workAddress;
 
     public Long getId() {
         return id;
