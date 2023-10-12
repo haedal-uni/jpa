@@ -18,17 +18,9 @@ public class Member{
     @Embedded
     private Address homeAddress;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "city",
-            column = @Column(name = "WORK_CITY")), // DB 컬럼을 따로 매핑해야한다.
-            @AttributeOverride(name = "street",
-                    column = @Column(name = "WORK_STREET")),
-            @AttributeOverride(name = "zipcode",
-                    column = @Column(name = "WORK_ZIPCODE")),
-
-    })
-    private Address workAddress;
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
 
     public Long getId() {
         return id;
@@ -46,16 +38,8 @@ public class Member{
         this.username = username;
     }
 
-    public Period getWorkPeriod() {
-        return workPeriod;
-    }
-
     public void setWorkPeriod(Period workPeriod) {
         this.workPeriod = workPeriod;
-    }
-
-    public Address getHomeAddress() {
-        return homeAddress;
     }
 
     public void setHomeAddress(Address homeAddress) {
