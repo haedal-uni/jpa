@@ -15,6 +15,7 @@ public class JpaMain {
 
         try {
             Address address = new Address("city", "street", "zipcode");
+            Address address1 = new Address("city", "street", "zipcode");
 
             Member member = new Member();
             member.setUsername("member1");
@@ -23,6 +24,8 @@ public class JpaMain {
 
             Address newAddress = new Address("NewCity", address.getStreet(), address.getZipcode());
             member.setHomeAddress(newAddress);
+
+            System.out.println("address.equals(address1) : "  + address.equals(address1));
 
             tx.commit();
         }catch (Exception e){
