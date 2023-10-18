@@ -1,11 +1,12 @@
 package hellojpa;
 
 import javax.persistence.*;
-import javax.print.attribute.standard.MediaSize;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static javax.persistence.CascadeType.ALL;
 
 @Entity
 public class Member{
@@ -24,9 +25,14 @@ public class Member{
     @Column(name = "FOOD_NAME") // String 하나이고 정의한게 아니라서 작성함
     private Set<String> favoriteFoods = new HashSet<>();
 
-    @ElementCollection // 값 타입 컬렉션
-    @CollectionTable(name = "ADDRESS", joinColumns = @JoinColumn(name = "MEMBER_ID"))
-    private List<Address> addressHistory = new ArrayList<>();
+//    @ElementCollection // 값 타입 컬렉션
+//    @CollectionTable(name = "ADDRESS", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+//    private List<Address> addressHistory = new ArrayList<>();
+
+    // 값 타입이 아니라 엔티티로 매핑한다.
+    @OneToMany(cascade = ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMBER_ID")
+    private List<AddressEntity> addressHistory = new ArrayList<>();
 
     public Address getHomeAddress() {
         return homeAddress;
@@ -60,11 +66,11 @@ public class Member{
         this.favoriteFoods = favoriteFoods;
     }
 
-    public List<Address> getAddressHistory() {
+    public List<AddressEntity> getAddressHistory() {
         return addressHistory;
     }
 
-    public void setAddressHistory(List<Address> addressHistory) {
+    public void setAddressHistory(List<AddressEntity> addressHistory) {
         this.addressHistory = addressHistory;
     }
 }
