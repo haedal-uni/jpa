@@ -20,8 +20,20 @@ public class JpaMain {
         tx.begin();
 
         try {
-            em.createNativeQuery("select MEMBER_ID, city, street, zipcode, USERNAME from MEMBER")
+            Member member = new Member();
+            member.setUsername("member1");
+            em.persist(member);
+            // 이 시점에는 db에 안들어감
+
+            em.flush(); // 강제로 flush 해줘야한다.
+
+            List<Member> resultList = em.createNativeQuery("select MEMBER_ID, city, street, zipcode, USERNAME from MEMBER", Member.class)
                     .getResultList();
+
+            for (Member member1 : resultList) {
+                System.out.println("member1 = " + member1);
+            }
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();
