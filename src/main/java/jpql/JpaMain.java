@@ -1,5 +1,6 @@
 package jpql;
 import javax.persistence.*;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -16,9 +17,16 @@ public class JpaMain {
             member.setUsername("member1");
             member.setAge(10);
 
-            TypedQuery<Member> query1 = em.createQuery("select m from Member m", Member.class);
-            TypedQuery<String> query2 = em.createQuery("select m.username from Member m", String.class);
-            Query query3 = em.createQuery("select m.username, m.age from Member m");
+            TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
+            List<Member> resultList = query.getResultList();
+            for (Member member1 : resultList) {
+                System.out.println("member1 = " + member1);
+            }
+
+            // 반환 값이 딱 한개일 때
+            TypedQuery<Member> query2 = em.createQuery("select m from Member m where m.id=10", Member.class);
+            Member result = query2.getSingleResult();
+            System.out.println("result = " + result);
 
             tx.commit();
         }catch (Exception e){
