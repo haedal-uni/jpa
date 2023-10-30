@@ -21,13 +21,12 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            List<Object[]> resultList = em.createQuery("select distinct m.username, m.age from Member m")
+            List<MemberDto> result = em.createQuery("select new jpql.MemberDto(m.username, m.age) from Member m", MemberDto.class)
                     .getResultList();
 
-            Object[] result = resultList.get(0);
-            System.out.println("username = " + result[0]);
-            System.out.println("age = " + result[1]);
-
+            MemberDto memberDto = result.get(0);
+            System.out.println("memberDto.getUsername() = " + memberDto.getUsername());
+            System.out.println("memberDto.getAge() = " + memberDto.getAge());
 
             tx.commit();
         }catch (Exception e){
