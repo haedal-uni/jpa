@@ -21,8 +21,14 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            em.createQuery("select distinct m.username, m.age from Member m")
+            List resultList = em.createQuery("select distinct m.username, m.age from Member m")
                     .getResultList();
+
+            Object o = resultList.get(0);
+            Object[] result = (Object[]) o;
+
+            System.out.println("username = " + result[0]);
+            System.out.println("age = " + result[1]);
 
             tx.commit();
         }catch (Exception e){
